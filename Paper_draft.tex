@@ -77,7 +77,7 @@ Here we detail the basic setup for simulating a system of $N$ hysterons. We defi
 where $s_i \in \{0, 1\}$ are the phases of individual hysterons. We then model the response of individual hysterons to an external driving field $U$ by defining up and down switching fields $u_i^+$ and $u_i^-$. A hysteron transitions from phase 0 to 1 ('up') if $U \geq u_i^+$, and from phase 1 to 0 ('down') if $U \leq u_i^-$.\\
 If the system of hysterons is non-interacting, then the switching fields $\{u_i^+\}, \{u_i^-\}$ are fixed values $u_i^{+, -}$. We refer to these switching fields in the absence of interactions as the bare switching fields. If there are interactions, the switching fields are modified by the state $S$:
 \begin{equation}
-    U_i^{+, -}(S) = U_i^{+, -} + \Delta u_i(S)
+    U_i^{+, -}(S) = u_i^{+, -} + \Delta u_i(S)
 \end{equation}
  When a driving field $U$ is applied to a system with the collective state $S$, any hysterons that are in phase 0 and have $U \geq U_i^+$, or that are in phase 1 and have $U \leq U_i^-$, become unstable. If a single hysteron is unstable, that hysteron flips. If multiple hysterons are unstable, the system's response is ambiguous, as it is unclear which hysteron flips first and these operations do not commute if there is coupling. We therefore do not consider cases where multiple hysterons are unstable.\\
 It can occur that the flipping of one hysteron destabilizes other hysterons when there is coupling. It may therefore take multiple iterations for the system to reach stability under a field $U$. We refer to this phenomenon as an avalanche. It is also possible that an avalanche leads back into the state itself, in which case the system becomes caught in a self-loop. We consider this scenario to be ill-defined, as the system's state is caught in an infinite loop.\\
@@ -87,7 +87,7 @@ The possible responses of a collection of $N$ hysterons to driving are captured 
 \section{Topological approach}
 In past work from our group, the possible transition graphs for two- and three-hysteron systems were found using numerical sampling. The obtained graphs contain several noteworthy phenomena that are not possible in the Preisach model, such as breaking of loop return point memory, scrambling, multiperiodic cycles and long transients (Van Hecke, 2021).\\
 A significant disadvantage of numerical sampling is that it is not conclusive, as it is always possible that a region in parameter space leading to a certain transition graph is missed. Here we aim to establish a tool that can conclusively find all possible graphs for a given number of hysterons $N$.\\
-Fortunately, it is not necessary to sample all of parameter space. The reason for this is that the transition graph for a given system does not depend on the absolute values of the switching fields $I_i^{+,-}(S)$, but only on the order of the switching fields. In principle, one could find all possible transition graphs for a given number of hysterons $N$ by evaluating all permutations of the order of the switching fields.\\
+Fortunately, it is not necessary to sample all of parameter space. The reason for this is that the transition graph for a given system does not depend on the absolute values of the switching fields $U_i^{+,-}(S)$, but only on the order of the switching fields. In principle, one could find all possible transition graphs for a given number of hysterons $N$ by evaluating all permutations of the order of the switching fields.\\
 In practice, however, it is impractical to find the possible transition graphs by evaluating all possible orderings. This is because the transition graph only depends on a partial order of the switching fields, not on the total order, so that the number of permutations vastly outweighs the number of possible graphs.\\
 Instead of evaluating all permutations of the total order of the switching fields, we find it more useful to take a reverse approach by starting from the topology. We first construct a number of candidate graphs, which describe the behaviour of a hysteron system in a well-defined way but are not necessarily realizable. We then generate a set of inequalities that the switching fields must obey so that the given candidate graph is obtained. Finally, we check whether the candidate graph can be realized by checking whether the generated set of inequalities has a solution. We thus obtain a list of possible graphs.\\
 In addition to being an efficient method for conclusively finding the possible graphs, the method of candidate graphs also allows us to consider rational design of graphs. We can use the candidate graph method to directly consider the possibility of the interesting behaviours that have been observed previously, such as multiperiodic cycles and long transients, for a  given number of hysterons.\\
@@ -104,13 +104,13 @@ Naively, one can construct all possible transition graphs by finding the possibl
 \end{figure}
 We can greatly reduce the number of candidate graphs by making a basic consideration about the allowed avalanches. We know that from a stable state $S$, hysteron $i$ can flip up if
 \begin{equation}
-    u_i^+(S) = \min_{s_j=0}u_j^+(S)
+    U_i^+(S) = \min_{s_j=0}U_j^+(S)
 \end{equation}
 and similarly, hysteron $i$ can flip down if
 \begin{equation}
-    u_i^-(S) = \max_{s_j=1}u_j^-(S)
+    U_i^-(S) = \max_{s_j=1}U_j^-(S)
 \end{equation}
-We now observe that, because we only consider the switching fields $u_i^{+,-}(S)$ to depend on the state $S$ and not on the driving field $U$, the same ordering must apply regardless of whether or not a state is initially stable. Thus, there is only ever one up and down transition from each state, even if the transition is only a part of a longer avalanche. As a result, one can construct the possible graphs more efficiently than in the naive method by first constructing all possible graphs consisting out of single hysteron flips ($l=1$), then evaluating the possible avalanches for each graph in turn. We refer to the graphs with only $l=1$ transitions as base graphs.\\
+We now observe that, because we only consider the switching fields $U_i^{+,-}(S)$ to depend on the state $S$ and not on the driving field $U$, the same ordering must apply regardless of whether or not a state is initially stable. Thus, there is only ever one up and down transition from each state, even if the transition is only a part of a longer avalanche. As a result, one can construct the possible graphs more efficiently than in the naive method by first constructing all possible graphs consisting out of single hysteron flips ($l=1$), then evaluating the possible avalanches for each graph in turn. We refer to the graphs with only $l=1$ transitions as base graphs.\\
 \begin{figure}[!ht]
     \centering
     \includegraphics[width=0.5\textwidth]{breakdown_sketch.png}
@@ -166,34 +166,34 @@ We now consider in detail what the design inequalities of a graph look like, usi
     \caption{Design inequalities for an example $N=2$ graph (a). Design inequalities are shown for (b) the $l=1$ transition $00\uparrow 01$ and (c) the $l=2$ avalanche $11\downarrow 10 \downarrow 00$.}
     \label{fig:design_ineqs_example}
 \end{figure}\\
-We first consider the inequalities required for the transition $00\uparrow 01$, which consists out of a single flip of hysteron 2. In order for hysteron 2 to flip before hysteron 1 when the driving $U$ is increased, one must have that $u_2^+(00) < u_1^+(01)$. Next, we must have that the state 01 is stable under the current driving, which is the switching field $u_2^+(00)$. The requirement for state 01 to be stable leads to two more inequalities, namely $u_1^+(01) > u_2^+(00)$ and $u_2^-(01) < u_2^+ (00)$.\\
-As a second example, we consider the avalanche $11\downarrow 10 \downarrow 00$. Analogously to the previous example, we first require for hysteron 2 to be the first to flip down when decreasing the driving $U$, so that we obtain the inequality $u_2^-(11) > u_1^-(10)$. Next, a set of inequalities is required which describes the stability of the state 10 under the field $u_2^-(11)$. Unlike in the previous example, however, hysteron 1 must now be unstable. Thus, we obtain the set of inequalities $u_1^-(10) \geq u_2^-(11)$ and $u_2^+(10) > u_2^-(11)$\\
+We first consider the inequalities required for the transition $00\uparrow 01$, which consists out of a single flip of hysteron 2. In order for hysteron 2 to flip before hysteron 1 when the driving $U$ is increased, one must have that $U_2^+(00) < U_1^+(01)$. Next, we must have that the state 01 is stable under the current driving, which is the switching field $U_2^+(00)$. The requirement for state 01 to be stable leads to two more inequalities, namely $U_1^+(01) > U_2^+(00)$ and $U_2^-(01) < U_2^+ (00)$.\\
+As a second example, we consider the avalanche $11\downarrow 10 \downarrow 00$. Analogously to the previous example, we first require for hysteron 2 to be the first to flip down when decreasing the driving $U$, so that we obtain the inequality $U_2^-(11) > U_1^-(10)$. Next, a set of inequalities is required which describes the stability of the state 10 under the field $U_2^-(11)$. Unlike in the previous example, however, hysteron 1 must now be unstable. Thus, we obtain the set of inequalities $U_1^-(10) \geq U_2^-(11)$ and $U_2^+(10) > U_2^-(11)$\\
 As described in Section \ref{sec:constructing_graphs}, the graph in Fig. \ref{fig:design_ineqs_example} can be broken down as the combination of a base graph and the avalanche $11\downarrow 10 \downarrow 00$. In the same way, we can distinguish two parts to the design inequalities. One one hand, for each transition there is a set of inequalities required to initiate the transition, which is of the form
 \begin{equation}
-    u_i^+(S^{(0)} = \min_{s_j = 0}u_j^+(S^{(0)})
+    U_i^+(S^{(0)} = \min_{s_j = 0}U_j^+(S^{(0)})
 \end{equation}
 or 
 \begin{equation}
-    u_i-(S^{(0)} = \max_{s_j = 1}u_j^-(S^{(0)})
+    U_i-(S^{(0)} = \max_{s_j = 1}U_j^-(S^{(0)})
 \end{equation}
 The set of inequalities required to initiate the transition is associated with the base graph, and we refer to it accordingly as the base inequalities. On the other hand, for each transition there are $l$ sets of inequalities describing the stability of subsequent states under the field that initiated the transition. We refer to the part of the design inequalities that describes the stability as the relaxation inequalities.\\
 For the general model where the switching fields $u_i^{+, -}(S)$ are independent, we note that the base inequalities are always solvable. This is because there is no overlap between the sets of inequalities for the individual transitions, since they describe relations between switching fields at the same state $S^{(0)}$. In contrast, the relaxation inequalities describe relations between switching fields at different states, so that it is possible for a combination of transitions to be incompatible even in the general model.\\
 \section{Application to specific models}
-We now illustrate how the base graph method is applied to the specific model where the coupling between hysterons is linear. Linear coupling entails that the switching fields $u_i^{+, -}(S)$ depend on the state $S$ as:
+We now illustrate how the base graph method is applied to the specific model where the coupling between hysterons is linear. Linear coupling entails that the switching fields $U_i^{+, -}(S)$ depend on the state $S$ as:
 \begin{equation}
-    u_i^{+, -}(S) = u_{i, 0}^{+, -} -\sum_{i \neq j}c_{ij}s_j
+    U_i^{+, -}(S) = u_i^{+, -} -\sum_{i \neq j}c_{ij}s_j
 \end{equation}
 Depending on the system, the allowed coupling coefficients $c_{ij}$ may be restricted. We consider two instances of the linear model for $N=3$. First, we look at the case where only one of the coupling coefficients $c_{ij}$ is unequal to zero. Second, we look at a model for hysterons in series, where the coupling is $c_{ij}  = c_j$ with all $c_j < 0$.\\
 \subsection{Linear coupling}
-\begin{figure}[!ht]
-    \centering
-    \includegraphics[width=0.5\textwidth]{.png}
-    \caption{Overview of possible scrambling and avalanches in the linear model for a single nonzero $c_ij$.}
-    \label{fig:linear_coupling}
-\end{figure}\\
+%\begin{figure}[!ht]
+%    \centering
+%    \includegraphics[width=0.5\textwidth]{.png}
+%    \caption{Overview of possible scrambling and avalanches in the linear model for a single nonzero $c_ij$.}
+%    \label{fig:linear_coupling}
+%\end{figure}\\
 \subsection{Hysterons in series}
 \section{Discussion}
 \section{Outlook}
-\bibliography{apssamp}% Produces the bibliography via BibTeX.
+%\bibliography{apssamp}% Produces the bibliography via BibTeX.
 
 \end{document}
