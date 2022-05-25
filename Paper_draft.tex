@@ -94,6 +94,7 @@ In addition to being an efficient method for conclusively finding the possible g
 %We here explain our method for finding the possible graphs via candidate graphs. We first show how the design inequalities are obtained for a single graph. We explain how one can check if the set of inequalities has a solution using the well-established method of Fourier-Motzkin elimination. Secondly, we detail how one can construct a list of candidate graphs from all combinations of possible transition graphs. Finally, we improve on the candidate graphs method by establishing a notion of base graphs.
 \section{Constructing graphs}\label{sec:constructing_graphs}
 We here establish a method for finding the transition graphs that are possible for coupled hysterons. Rather than constructing the coupled transition graph from scratch, we start from a Preisach graph, then add the coupling effects of scrambling and avalanches one by one.\\
+\subsection{Candidate graphs}
 A well-defined transition graph for $N$ hysterons consists out of $2^N$ states, and $2(2^N-1)$ transitions, namely the up transitions for each state except the all-ones state and the down transitions for each state except the all-zero state. A transition graph is constructed by choosing a transition path for each of these $2(2^N-1)$ transitions. A transition path may be a single hysteron flip, or may consist of multiple flipped hysterons. When a transition path consists of multiple hysteron flips, we speak of an avalanche.\\
 Naively, one can construct all possible transition graphs by finding the possible transition paths for each individual transition, and evaluating all possible combinations of transition paths. However, the naive method generates many transition graphs that are not realizable. For example, for $N=2$ one finds $3^5\times 6 = 1458$ graphs (Fig.\ref{fig:transition_paths_N2}), while the number of solvable graphs is only thirteen for linear coupling.\\
 \begin{figure}
@@ -102,6 +103,9 @@ Naively, one can construct all possible transition graphs by finding the possibl
     \caption{Overview of the possible transition paths for each $N=2$ transition individually. The greyed-out area signifies transitions that are left out when accounting for exchange symmetry.}
     \label{fig:transition_paths_N2}
 \end{figure}
+\subsubsection{Exchange symmetry}
+\subsubsection{Garden-of-Eden states}
+\subsection{Realizability}
 To better understand why some graphs are not realizable,  we look in detail at the design inequalities underlying the graphs (see SI), and identify the inequalities that are in conflict with one another. By then tracing these inequalities back to the transitions from which we arise, we find the combinations of transitions (i.e., subgraphs) that are incompatible and thus make a graph not realizable. Several examples of impossible subgraphs are given in Fig. \ref{fig:impossiblegraphs}a.\\
 We now direct our attention to a particular group of impossible subgraphs, an example of which is shown in Fig. \ref{fig:impossiblegraphs}b. The example subgraph consists of the single-flip transition $11\downarrow 10$, and the avalanche $10\uparrow 11 \downarrow 01$. We observe that the transition $11 \downarrow 10$ requires that $U_2^-(11) > U_1^-(11)$ to have hysteron 2 flip down from the state 11. Conversely, the transition $10\uparrow 11 \downarrow 01$ requires the inequality $U_1^-(11) > U_2^-(11)$ to have an avalanche where only hysteron 1 flips down from the state 11. The contradiction between the two transitions arises because the avalanche $10 \uparrow 11 \downarrow 01$ imposes that the switching field $U_1^-$ is the highest down switching field, even though the transition $11 \downarrow 01$ is only a part of a larger avalanche.\\
 The argument used for the example subgraph can be extended to the general argument that the up and down flips which can occur from a state do not depend on whether or not that state is stable. As a consequence, all avalanches occuring in a graph must conform to an underlying graph of single-flip transitions, which we refer to as the base graph. \\
@@ -118,14 +122,15 @@ The idea of base graphs allows us to improve our method for generating candidate
     \caption{All possible base graphs for the two- and three-hysteron systems. a) All base graphs for $N=2$; since scrambling is not possible for $N=2$, the base graphs are the two Preisach graphs. b) Preisach graphs for $N=3$. c) Scrambled base graphs for N=3 that are possible for linear coupling.}
     \label{fig:basegraphs_n3}
 \end{figure}
+In addition to the base graph method being an efficient method for generating candidate graphs, it also providedes us with a powerful framework for understanding the effects of hysteron interactions on the allowed transition graphs. \\
+\subsection{The base graph method}
 \begin{figure}[!ht]
     \centering
     \includegraphics[width=0.5\textwidth]{breakdown_sketch.png}
     \caption{Breakdown of an example transition graph into a base graph and a combination of avalanches. The base graph can itself be separated into the main loop and a number of scrambled transitions.}
     \label{fig:basegraphs_avalanches}
 \end{figure}
-In addition to the base graph method being an efficient method for generating candidate graphs, it also providedes us with a powerful framework for understanding the effects of hysteron interactions on the allowed transition graphs. \\
-\subsection{Base graphs}
+\subsubsection{Base graphs}
 An advantage of the concept of base graphs is that, in the absence of avalanches, it is still relatively straightforward to count the number of possible graphs. We will now show how the number of base graphs increases in the presence of scrambling.\\
 Scrambling entails that the ordering of switching fields can change throughout the graph. In order to discuss scrambling more explicitly, we here define the main loop as the series of up and down transitions connecting the two saturated states. In the Preisach model, the ordering of the main loop fixes the transitions throughout the transition graph, so that each main loop corresponds to a unique Preisach graph. Because the down boundary of the main loop has $N!$ permutations, there are $N!$ Preisach graphs for a system of $N$ hysterons.\\
 In a scrambled graph, one or more of the transitions in the graph deviates from the main loop. Therefore, when scrambling is allowed, there are multiple possible graphs for each main loop. We will now explicitly calculate the number of base graphs per main loop.\\
@@ -150,7 +155,7 @@ When the up boundary of the main loop is fixed to account for exchange symmetry,
     \#graphs/ML = \frac{\left(\prod_{M=0}^{N}M^{\binom{N}{M}}\right)^2}{N!^2} = \left(\prod_{M=1}^{N-1}M^{\binom{N}{M}-1}\right)^2
 \end{equation}
 It should be noted that, when constructing the base graphs from all possible combinations of transitions, the resulting graphs often contain states that cannot be reached from the all-zero state. We refer to these states as garden-of-Eden states (Fig. \ref{fig:basegraphs_avalanches}b). We generally choose to ignore garden-of-Eden states. As a result, the base graphs as counted in Equation \ref{eq:graph_count} can contain duplicates, so that the true number of graphs turns out lower than this number. For example, for $N=3$, Equation \ref{eq:graph_count} gives that the number of base graphs is $6\times16=96$. When ignoring garden-of-Eden states, we find that the number of graphs is only 27.\\
-\subsection{Avalanches}
+\subsubsection{Avalanches}
 \begin{figure}[!ht]
     \centering
     \includegraphics[width=0.5\textwidth]{constructing_avalanches_sketch.png}
