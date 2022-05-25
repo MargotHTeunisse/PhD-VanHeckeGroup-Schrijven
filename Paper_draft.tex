@@ -111,6 +111,12 @@ and similarly, hysteron $i$ can flip down if
     U_i^-(S) = \max_{s_j=1}U_j^-(S)
 \end{equation}
 We now observe that, because we only consider the switching fields $U_i^{+,-}(S)$ to depend on the state $S$ and not on the driving field $U$, the same ordering must apply regardless of whether or not a state is initially stable. Thus, there is only ever one up and down transition from each state, even if the transition is only a part of a longer avalanche. As a result, one can construct the possible graphs more efficiently than in the naive method by first constructing all possible graphs consisting out of single hysteron flips (i.e., transitions with transition length $l=1$), then evaluating the possible avalanches for each graph in turn. We refer to the graphs with only $l=1$ transitions as base graphs.\\
+\begin{figure}
+    \centering
+    \includegraphics[width=0.5\textwidth]{base_graphs.png}
+    \caption{All possible base graphs for the two- and three-hysteron systems. a) All base graphs for $N=2$; since scrambling is not possible for $N=2$, the base graphs are the two Preisach graphs. b) Preisach graphs for $N=3$. c) Scrambled base graphs for N=3 that are possible for linear coupling.}
+    \label{fig:basegraphs_n3}
+\end{figure}
 \begin{figure}[!ht]
     \centering
     \includegraphics[width=0.5\textwidth]{breakdown_sketch.png}
@@ -120,8 +126,7 @@ We now observe that, because we only consider the switching fields $U_i^{+,-}(S)
 It turns out that the idea of base graphs and avalanches provides us with a powerful framework for understanding the effects of hysteron interactions on the allowed transition graphs. \\
 \subsection{Base graphs}
 An advantage of the concept of base graphs is that, in the absence of avalanches, it is still relatively straightforward to count the number of possible graphs. We will now show how the number of base graphs increases in the presence of scrambling.\\
-Scrambling entails that the ordering of switching fields can change throughout the graph. In order to discuss scrambling more explicitly, we here define the concept of the main loop of a transition graph. We define the up and down boundaries of the main loop as the series of up transitions going from the all-zero to the all-one state, and the series of down transitions going from the all-one to the all-zero state, respectively. In general, we account for exchange symmetry by fixing the ordering of the up boundary. Therefore, we often refer to the down boundary of the main loop as simply the main loop.\\
-In the Preisach model, the ordering of the main loop fixes the transitions throughout the transition graph, so that each main loop corresponds to a unique Preisach graph. Because the down boundary of the main loop has $N!$ permutations, there are $N!$ Preisach graphs for a system of $N$ hysterons.\\
+Scrambling entails that the ordering of switching fields can change throughout the graph. In order to discuss scrambling more explicitly, we here define the main loop as the series of up and down transitions connecting the two saturated states. In the Preisach model, the ordering of the main loop fixes the transitions throughout the transition graph, so that each main loop corresponds to a unique Preisach graph. Because the down boundary of the main loop has $N!$ permutations, there are $N!$ Preisach graphs for a system of $N$ hysterons.\\
 In a scrambled graph, one or more of the transitions in the graph deviates from the main loop. Therefore, when scrambling is allowed, there are multiple possible graphs for each main loop. We will now explicitly calculate the number of base graphs per main loop.\\
 \begin{figure}[!ht]
     \centering
