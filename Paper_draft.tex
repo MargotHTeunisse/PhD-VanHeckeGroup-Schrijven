@@ -113,6 +113,12 @@ and similarly, hysteron $i$ can flip down if
 We now observe that, because we only consider the switching fields $U_i^{+,-}(S)$ to depend on the state $S$ and not on the driving field $U$, the same ordering must apply regardless of whether or not a state is initially stable. Thus, there is only ever one up and down transition from each state, even if the transition is only a part of a longer avalanche. As a result, one can construct the possible graphs more efficiently than in the naive method by first constructing all possible graphs consisting out of single hysteron flips (i.e., transitions with transition length $l=1$), then evaluating the possible avalanches for each graph in turn. We refer to the graphs with only $l=1$ transitions as base graphs.\\
 \begin{figure}
     \centering
+    \includegraphics[width=0.5\textwidth]{impossible_graphs.png}
+    \caption{Examples of impossible combinations of transitions for the two-hysteron system. a) Several examples of impossible combinations of transitions. b) Example of an combination of transitions that is impossible due to a violation of the underlying base graph. c) Illustration of how the graph in (b) violates the underlying base graph.}
+    \label{fig:impossiblegraphs}
+\end{figure}
+\begin{figure}
+    \centering
     \includegraphics[width=0.5\textwidth]{base_graphs.png}
     \caption{All possible base graphs for the two- and three-hysteron systems. a) All base graphs for $N=2$; since scrambling is not possible for $N=2$, the base graphs are the two Preisach graphs. b) Preisach graphs for $N=3$. c) Scrambled base graphs for N=3 that are possible for linear coupling.}
     \label{fig:basegraphs_n3}
