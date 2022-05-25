@@ -1,0 +1,45 @@
+\documentclass{article}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath}
+\usepackage{graphicx}
+
+\begin{document}
+
+\section{The 45th series graph}
+For three hysterons in series, we have obtained 44 realizable graphs, assuming a model where $c_{ij}=c_j, c_j \leq 0$.  We construct the graphs using the base graph method, where we first construct all possible 
+\begin{enumerate}
+    \item When $c_{ij}=c_j$, there is no scrambling, so the only base graphs are the Preisach graphs.
+    \item When $c_{j} \leq $, there can only be antiferromagnetic avalanches,
+    \item As a result of restrictions 1 and 2, there can only be avalanches of length $l=2$.
+    \item When $c_{ij} = c_j$ svalanches involving the same hysteron flips in the same directions must occur together. 
+\end{enumerate}
+After applying the restrictions, there are 45 candidate graphs for three hysterons in series. We find that 44 of these graphs are realizable, while a single graph is not (Fig. \ref{fig:45thgraph}. We now ask why the 45th graph is not realizable.
+\begin{figure}[!ht]
+    \centering
+    \includegraphics[width=0.8\textwidth]{45thgraph.png}
+    \caption{The single impossible candidate graph for three hysterons in series.}
+    \label{fig:45thgraph}
+\end{figure}\\
+A graph is realizable if the underlying set of design inequalities has a solution. We reason that all four transitions $001\uparrow 011$, $011\uparrow111\downarrow110$, $110\downarrow 010$ and $010\downarrow000\uparrow 001$ must be involved in the combination of inequalities that is incompatible, since more than one of the candidate graphs would otherwise be impossible.\\
+To know whether a set of inequalities is solvable, one can use the Fourier-Motzkin method for elimination of variables. In the Fourier-Motzkin method, a variable $x$ is eliminated by combining the inequalities to create a new set that does not contain $x$. A set of inequalities does not have a solution if, after all variables are eliminated, a contradictory statement remains such as $0 > 0$. By working backwards, we can identify which combinations of inequalities lead to a contradictory statement and are therefore incompatible.\\
+We find that for the 45th graph, there is a single combination of six inequalities that is incompatible, namely:
+\begin{equation}
+\begin{split}
+    u_1^- - c_2 &> u_2^- - c_1\\
+    u_3^+ &> u_1^-\\
+    u_2^- &\geq u_3^+\\
+    u_2^+ - c_3 &> u_3^- - c_2\\
+    u_1^+ &> u_2^+\\
+    u_3^- - c_1 &\geq u_1^+ - c_3\\
+\end{split}
+\end{equation}
+We further note that the six inequalities arise from the four transitions $001\uparrow 011$, $011\uparrow111\downarrow110$, $110\downarrow 010$ and $010\downarrow000\uparrow 001$ (Fig. \ref{fig:culprit_transitions}), in agreement with our prediction.
+\begin{figure}[!ht]
+    \centering
+    \includegraphics[width=0.8\textwidth]{45thgraph_culprit_withineqs.png}
+    \caption{The four transitions of the 45th graph that are not compatible: $001\uparrow 011$, $011\uparrow111\downarrow110$, $110\downarrow 010$ and $010\downarrow000\uparrow 001$.}
+    \label{fig:culprit_transitions}
+\end{figure}\\
+The 45th graph thus illustrates that it is not trivial to see whether a combination of transitions of compatible, and that it therefore remains necessary to explicitly check whether candidate graphs are solvable by generating the design inequalities.
+
+\end{document}
