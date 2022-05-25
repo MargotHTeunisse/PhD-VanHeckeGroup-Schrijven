@@ -97,11 +97,17 @@ We here establish a method for finding the transition graphs that are possible f
 \subsection{Candidate graphs}
 A well-defined transition graph for $N$ hysterons consists out of $2^N$ states, and $2(2^N-1)$ transitions, namely the up transitions for each state except the all-ones state and the down transitions for each state except the all-zero state. A transition graph is constructed by choosing a transition path for each of these $2(2^N-1)$ transitions. A transition path may be a single hysteron flip, or may consist of multiple flipped hysterons. When a transition path consists of multiple hysteron flips, we speak of an avalanche.\\
 Naively, one can construct all possible transition graphs by finding the possible transition paths for each individual transition, and evaluating all possible combinations of transition paths. However, the naive method generates many transition graphs that are not realizable. For example, for $N=2$ one finds $3^5\times 6 = 1458$ graphs (Fig.\ref{fig:transition_paths_N2}), while the number of solvable graphs is only thirteen for linear coupling.\\
-\begin{figure}
+\begin{figure}[ht!]
     \centering
     \includegraphics[width=0.5\textwidth]{possible_paths_v3.png}
     \caption{Overview of the possible transition paths for each $N=2$ transition individually. The greyed-out area signifies transitions that are left out when accounting for exchange symmetry.}
     \label{fig:transition_paths_N2}
+\end{figure}
+\begin{figure}[ht!]
+    \centering
+    \includegraphics[width=0.5\textwidth]{exchange_plus_goe.png}
+    \caption{Considerations for removing duplicate graphs: a) exchange symmetry and b) garden-of-Eden states.}
+    \label{fig:exchangeplusgoe}
 \end{figure}
 \subsubsection{Exchange symmetry}
 \subsubsection{Garden-of-Eden states}
