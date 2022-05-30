@@ -156,7 +156,7 @@ When the up boundary of the main loop is fixed to account for exchange symmetry,
 \begin{equation}\label{eq:graph_count}
     \#graphs/ML = \frac{\left(\prod_{M=0}^{N}M^{\binom{N}{M}}\right)^2}{N!^2} = \left(\prod_{M=1}^{N-1}M^{\binom{N}{M}-1}\right)^2
 \end{equation}
-It should be noted that, when constructing the base graphs from all possible combinations of transitions, the resulting graphs often contain states that cannot be reached from the all-zero state. We refer to these states as garden-of-Eden states (Fig. \ref{fig:basegraphs_avalanches}b). We generally choose to ignore garden-of-Eden states. As a result, the base graphs as counted in Equation \ref{eq:graph_count} can contain duplicates, so that the true number of graphs turns out lower than this number. For example, for $N=3$, Equation \ref{eq:graph_count} gives that the number of base graphs is $6\times16=96$. When ignoring garden-of-Eden states, we find that the number of graphs is only 27.\\
+The number of graphs given by Equation \label{eq:graph_count} takes into account exchange symmetry, but not garden-of-Eden states (Section \ref{ssec:candidate_graphs}), and thus gives a maximum on the number of base graphs. For example, for $N=3$, the number of base graphs provided by Equation \ref{eq:graph_count} is 96, while ignoring garden-of-Eden states reduces the number of base graphs to 35 (Fig. \ref{fig:basegraphs_n3}).
 \subsubsection{Avalanches}
 \begin{figure}[!ht]
     \centering
