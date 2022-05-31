@@ -7,6 +7,30 @@
 
 \section{Design inequalities}
 We can efficiently construct a list of candidate graphs using the base graph method. However, not every generated graph is necessarily solvable. One can check whether a graph is solvable from the set of linear inequalities underlying the graph, which we refer to as the design inequalities.\\
+We recall that a hysteron $i$ is stable under an external field $U$ if:
+\begin{equation}\label{eq:dynamics}
+\begin{cases}
+    U &>  U_i^+(S), s_i=0\\
+    U &< U_i^-(S), s_i=1\\
+\end{cases}
+\end{equation}
+To help our notation, we here define that
+\begin{equation}
+U_i(S) = 
+\begin{cases}
+    U_i^+(S), s_i=0\\
+     U_i^-(S), s_i=1\\
+\end{cases}
+\end{equation}
+We also define the direction $r_i$ as:
+\begin{equation}
+r_i = 1-2s_i
+\end{equation}
+so that $r_i = 1$ if $s_i=0$ and $r_i=-1$ if $s_i=1$.\\
+We can then rewrite the conditions from Equation \ref{eq:dynamics} into a single statement: 
+\begin{equation}
+ r_iU_i(S) > r_iU
+\end{equation}
 We now consider in detail what the design inequalities of a graph look like, using an example $N=2$ graph (Fig. \ref{fig:design_ineqs_example}).\\
 \begin{figure}[ht!]
     \centering
