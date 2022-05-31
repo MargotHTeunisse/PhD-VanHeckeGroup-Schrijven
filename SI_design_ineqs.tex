@@ -1,0 +1,30 @@
+\documentclass{article}
+
+\usepackage{graphicx}
+\usepackage{amsmath}
+
+\begin{document}
+
+\section{Design inequalities}
+We can efficiently construct a list of candidate graphs using the base graph method. However, not every generated graph is necessarily solvable. One can check whether a graph is solvable from the set of linear inequalities underlying the graph, which we refer to as the design inequalities.\\
+We now consider in detail what the design inequalities of a graph look like, using an example $N=2$ graph (Fig. \ref{fig:design_ineqs_example}).\\
+\begin{figure}[ht!]
+    \centering
+    \includegraphics[width=0.5\textwidth]{design_ineqs_sketch.png}
+    \caption{Design inequalities for an example $N=2$ graph (a). Design inequalities are shown for (b) the $l=1$ transition $00\uparrow 01$ and (c) the $l=2$ avalanche $11\downarrow 10 \downarrow 00$.}
+    \label{fig:design_ineqs_example}
+\end{figure}\\
+We first consider the inequalities required for the transition $00\uparrow 01$, which consists out of a single flip of hysteron 2. In order for hysteron 2 to flip before hysteron 1 when the driving $U$ is increased, one must have that $U_2^+(00) < U_1^+(01)$. Next, we must have that the state 01 is stable under the current driving, which is the switching field $U_2^+(00)$. The requirement for state 01 to be stable leads to two more inequalities, namely $U_1^+(01) > U_2^+(00)$ and $U_2^-(01) < U_2^+ (00)$.\\
+As a second example, we consider the avalanche $11\downarrow 10 \downarrow 00$. Analogously to the previous example, we first require for hysteron 2 to be the first to flip down when decreasing the driving $U$, so that we obtain the inequality $U_2^-(11) > U_1^-(10)$. Next, a set of inequalities is required which describes the stability of the state 10 under the field $U_2^-(11)$. Unlike in the previous example, however, hysteron 1 must now be unstable. Thus, we obtain the set of inequalities $U_1^-(10) \geq U_2^-(11)$ and $U_2^+(10) > U_2^-(11)$\\
+As described in Section \ref{sec:constructing_graphs}, the graph in Fig. \ref{fig:design_ineqs_example} can be broken down as the combination of a base graph and the avalanche $11\downarrow 10 \downarrow 00$. In the same way, we can distinguish two parts to the design inequalities. One one hand, for each transition there is a set of inequalities required to initiate the transition, which is of the form
+\begin{equation}
+    U_i^+(S^{(0)} = \min_{s_j = 0}U_j^+(S^{(0)})
+\end{equation}
+or 
+\begin{equation}
+    U_i-(S^{(0)} = \max_{s_j = 1}U_j^-(S^{(0)})
+\end{equation}
+The set of inequalities required to initiate the transition is associated with the base graph, and we refer to it accordingly as the base inequalities. On the other hand, for each transition there are $l$ sets of inequalities describing the stability of subsequent states under the field that initiated the transition. We refer to the part of the design inequalities that describes the stability as the relaxation inequalities.\\
+For the general model where the switching fields $u_i^{+, -}(S)$ are independent, we note that the base inequalities are always solvable. This is because there is no overlap between the sets of inequalities for the individual transitions, since they describe relations between switching fields at the same state $S^{(0)}$. In contrast, the relaxation inequalities describe relations between switching fields at different states, so that it is possible for a combination of transitions to be incompatible even in the general model.\\
+
+\end{document}
