@@ -139,14 +139,14 @@ In addition to the base graph method being an efficient method for generating ca
     \label{fig:basegraphs_avalanches}
 \end{figure}
 \subsubsection{Base graphs}
-An advantage of the concept of base graphs is that, in the absence of avalanches, it is still relatively straightforward to count the number of possible graphs. We will now show how the number of base graphs increases in the presence of scrambling.\\
-Scrambling entails that the ordering of switching fields can change throughout the graph. In order to discuss scrambling more explicitly, we here define the main loop as the series of up and down transitions connecting the two saturated states. In the Preisach model, the ordering of the main loop fixes the transitions throughout the transition graph, so that each main loop corresponds to a unique Preisach graph. Because the down boundary of the main loop has $N!$ permutations, there are $N!$ Preisach graphs for a system of $N$ hysterons (Fig.\ref{fig:basegraphs_n3}a-b).\\
-In a scrambled graph, one or more of the transitions in the graph deviates from the main loop. Therefore, when scrambling is allowed, there are multiple possible graphs for each main loop. We will now explicitly calculate the number of base graphs per main loop.\\
-To start with, we observe that the number of possible up and down flips for a state $S$ depends on the number of hysterons that is in phase 0 or 1. Defining the magnetisation of a state as
+We here show how we generate the list of base graphs for $N$ hysterons, which is subsequently used to construct the full list of candidate graphs. We first explain how base graphs can be divided up into Preisach and scrambled graphs. We then detail how one can count the number of base graphs per main loop.\\
+We can distinguish between two groups of base graphs. First, there are the Preisach graphs, which are possible without coupling. Second, there is a group of scrambled graphs, which are possible for interacting hysterons. Scrambling is a phenomenon previously seen in interacting hysterons (Van Hecke, 2021; Bense, 2021), where the order in which hysterons flip is not the same throughout the graph. It occurs when the ordering between the switching fields of two hysterons in the same phase are changed by one or more hysterons, and is therefore only possible for three or more hysterons. Remarkably, having introduced the concept of base graphs, we can identify scrambling as a feature of the base graph. We can thus separate the two coupling effects of scrambling and avalanches.\\
+In order to discuss scrambling more explicitly, we here define the main loop as the series of up and down transitions connecting the two saturated states. In the Preisach model, the ordering of the main loop fixes the transitions throughout the transition graph, so that each main loop corresponds to a unique Preisach graph. The number of main loops is the number of permuatations times the number of permutations of the down boundary, which is $N!^2$. However, we fix the up boundary when accounting for exchange symmetry, thus dividing the number of main loops by $N!$.  Therefore, when accounting for exchange symmetry, there are only $N!$ main loops and therefore $N!$ Preisach graphs. In a scrambled graph, one or more of the transitions in the graph deviates from the main loop, so that each main loop corresponds to a number of base graphs (Fig.\ref{fig:basegraphs_n3}).\\
+We now explicitly calculate the number of base graphs per main loop. To start with, we observe that the number of possible up and down flips for a state $S$ depends on the number of hysterons that is in phase 0 or 1. Defining the magnetisation of a state as
 \begin{equation}
     M(S) = \sum_i s_i
 \end{equation}
-we can state that the number of possible up flips for a state $S$ is equal to $N-M(S)$, while the number of possible down flips is $M(S)$. To calculate the number of possible graphs, it makes sense to iterate over the magnetisation.\\
+we can state that the number of possible up flips for a state $S$ is equal to $N-M(S)$, while the number of possible down flips is $M(S)$.\\
 Next, we ask how many states exist with the magnetisation $M$. The number of states with the magnetisation $M$ is the number of possible binary numbers that has $M$ ones and $N-M$ zeros, which is equal to the binomial coefficient $\binom{N}{M}$.\\
 It follows that the number of base graphs for a given number of hysterons $N$ is
 \begin{equation}
@@ -156,7 +156,7 @@ When the up boundary of the main loop is fixed to account for exchange symmetry,
 \begin{equation}\label{eq:graph_count}
     \#graphs/ML = \frac{\left(\prod_{M=0}^{N}M^{\binom{N}{M}}\right)^2}{N!^2} = \left(\prod_{M=1}^{N-1}M^{\binom{N}{M}-1}\right)^2
 \end{equation}
-The number of graphs given by Equation \label{eq:graph_count} takes into account exchange symmetry, but not garden-of-Eden states (Section \ref{ssec:candidate_graphs}), and thus gives a maximum on the number of base graphs. For example, for $N=3$, the number of base graphs provided by Equation \ref{eq:graph_count} is 96, while ignoring garden-of-Eden states reduces the number of base graphs to 35 (Fig. \ref{fig:basegraphs_n3}).
+The number of graphs given by Equation \ref{eq:graph_count} takes into account exchange symmetry, but not garden-of-Eden states (Section \ref{ssec:candidate_graphs}). When garden-of-Eden states are excluded, the number of base graphs turns out lower than that given in equation \ref{eq:graph_count}. For example, for $N=3$, the number of base graphs provided by Equation \ref{eq:graph_count} is 96, while excluding garden-of-Eden states reduces the number of base graphs to 35 (Fig. \ref{fig:basegraphs_n3}).
 \subsubsection{Avalanches}
 \begin{figure}[!ht]
     \centering
