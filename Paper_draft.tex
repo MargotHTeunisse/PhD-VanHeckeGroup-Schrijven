@@ -65,9 +65,9 @@ Universiteit Leiden
 
 %\tableofcontents
 \section{Introduction}
-Frustrated media can have rugged energy landscapes, with many metastable states. Recent work has shown that the many metastable states in frustrated systems can lead to unusual pathways when the system is subject to driving. For a variety of systems, including sheared amorphous solids (Nagel, 2021; Keim \& Paulsen, 2019), crumpled thin sheets (Lahini, 2021), corrugated sheets (Bense, 2021) and origami structures (Lechenault, 2021) remarkable phenomena such as breaking of return-point memory, a multiperiodic response to cyclical driving, and transient memory as described by the park bench model(Nagel, 2021; Keim \& Paulsen, 2019) have been observed.\\ 
-It turns out that the response of many frustrated systems can be captured by an interacting collection of hysteretic two-state elements, called hysterons. The hysteron model, first suggested by Ferenc Preisach (Preisach, 1935), has long been used to model hysteretic systems as a collection of small hysteretic two-state elements. However, the Preisach model considers hysterons to be independent, while the interacting hysteron model has remained largely unexplored. The recent experimental findings show that the interacting hysteron model is relevant for many physical systems, and thus worth examining in more detail.\\
-The possible metastable states and transitions between these states for a given hysteron system can be portrayed as a directed graph, which captures all possible responses of the system to driving (Regev, 2019). Numerical sampling work from our group has shown that the number of possible transition graphs for a system of interacting hysterons increases dramatically with the number of hysterons. For as few as three interacting hysterons, over 15,000 distinct graphs are found (Van Hecke, 2021). Because the number of possible transition graphs quickly grows overwhelming, a systematic method will be needed for categorizing the graphs.\\
+Frustrated media can have rugged energy landscapes, with many metastable states. Recent work has shown that the many metastable states in frustrated systems can lead to unusual pathways when the system is subject to driving. For a variety of systems, including sheared amorphous solids\cite{lindeman2021}( Keim \& Paulsen, 2019), crumpled thin sheets (Lahini, 2021), corrugated sheets\cite{bense2021} and origami structures (Lechenault, 2021) remarkable phenomena such as breaking of return-point memory, a multiperiodic response to cyclical driving, and transient memory as described by the park bench model(Nagel, 2021; Keim \& Paulsen, 2019) have been observed.\\ 
+It turns out that the response of many frustrated systems can be captured by an interacting collection of hysteretic two-state elements, called hysterons. The hysteron model, first suggested by Ferenc Preisach\cite{preisach1935}, has long been used to model hysteretic systems as a collection of small hysteretic two-state elements. However, the Preisach model considers hysterons to be independent, while the interacting hysteron model has remained largely unexplored. The recent experimental findings show that the interacting hysteron model is relevant for many physical systems, and thus worth examining in more detail.\\
+The possible metastable states and transitions between these states for a given hysteron system can be portrayed as a directed graph, which captures all possible responses of the system to driving (Regev, 2019). Numerical sampling work from our group has shown that the number of possible transition graphs for a system of interacting hysterons increases dramatically with the number of hysterons. For as few as three interacting hysterons, over 15,000 distinct graphs are found\cite{vhecke2021}. Because the number of possible transition graphs quickly grows overwhelming, a systematic method will be needed for categorizing the graphs.\\
 Here we establish a systematic method to gradually approach the complexity of the interacting hysteron model, starting from the Preisach model. We first establish a formalism for constructing the transition graph for coupled hysterons by starting from a Preisach graph, and adding the effects of coupling step-by-step. We show how this formalism is used to construct a list of candidate graphs for a given number of hysterons. We then detail a method for checking whether a given transition graph can be realized, both in general and for a specific model. Finally, we illustrate our formalism for a model where hysterons are linearly coupled.\\
 \section{Model}
 Here we detail the basic setup for simulating a system of $N$ hysterons. We define the state of the system $S$ as
@@ -188,15 +188,10 @@ We now illustrate how the base graph method is applied to the specific model whe
 \end{equation}
 Depending on the system, the allowed coupling coefficients $c_{ij}$ may be restricted. We consider two instances of the linear model for $N=3$. First, we look at the case where only one of the coupling coefficients $c_{ij}$ is unequal to zero. Second, we look at a model for hysterons in series, where the coupling is $c_{ij}  = c_j$ with all $c_j < 0$.\\
 \subsection{Linear coupling}
-%\begin{figure}[!ht]
-%    \centering
-%    \includegraphics[width=0.5\textwidth]{.png}
-%    \caption{Overview of possible scrambling and avalanches in the linear model for a single nonzero $c_ij$.}
-%    \label{fig:linear_coupling}
-%\end{figure}\\
 \subsection{Hysterons in series}
 \section{Discussion}
 \section{Outlook}
-%\bibliography{apssamp}% Produces the bibliography via BibTeX.
+
+\bibliography{test}% Produces the bibliography via BibTeX.
 
 \end{document}
