@@ -27,7 +27,9 @@
 \usepackage[table]{xcolor}
 \newcommand\note[1]{\textcolor{red}{#1}}
 \usepackage{amsmath}
-\usepackage{subfig}
+\usepackage{tikz}
+\usetikzlibrary{positioning}
+\usetikzlibrary{decorations.pathreplacing,calligraphy}
 \usepackage{hyperref}% add hypertext capabilities
 %\usepackage[mathlines]{lineno}% Enable numbering of text and display math
 %\linenumbers\relax % Commence numbering lines
@@ -178,9 +180,24 @@ Using base graphs, we can improve upon our method for generating candidate graph
 \end{table*}
 In addition to the base graph method being an efficient method for generating candidate graphs, it also providedes us with a powerful framework for understanding the effects of hysteron interactions on the allowed transition graphs. \\
 \subsection{The base graph method}
-\begin{figure}[!ht]
-    \centering
-    \includegraphics[width=0.5\textwidth]{breakdown_sketch.png}
+\begin{figure}[ht!]
+\centering
+\begin{tikzpicture}[squarednode/.style={rectangle, draw=black, fill=white, thick, minimum size=3mm}]
+\node[squarednode](mainloop){Main loop};
+\node[squarednode](scrambling)[right=of mainloop] {Scrambling};
+\node[squarednode](avalanches)[right=of scrambling] {Avalanches};
+\node[squarednode](finalgraph)[right=of avalanches] {Final graph};
+
+\draw[->, very thick] (mainloop.east) -- (scrambling.west);
+\draw[->, very thick] (scrambling.east) -- (avalanches.west);
+\draw[->, very thick] (avalanches.north) arc (-80:260:10pt)
+node[pos=0.5, above=2pt]{Iterate over $l$};
+\draw[decorate, decoration = {calligraphic brace, amplitude=6pt,raise=10pt}, very thick] (mainloop.west)  -- (scrambling.east)
+node[pos=0.5,above=15pt,black] {Base graph};
+\draw[decorate, decoration = {calligraphic brace, amplitude=6pt,raise=10pt}, very thick] (avalanches.east)  -- (scrambling.west)
+node[pos=0.5, below=15pt,black] {Only with coupling}; 
+\draw[->, very thick] (avalanches.east) -- (finalgraph.west);
+\end{tikzpicture}
     \caption{Breakdown of an example transition graph into a base graph and a combination of avalanches. The base graph can itself be separated into the main loop and a number of scrambled transitions.}
     \label{fig:basegraphs_avalanches}
 \end{figure}
