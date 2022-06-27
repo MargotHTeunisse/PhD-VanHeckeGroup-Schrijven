@@ -27,6 +27,9 @@
 \usepackage[table]{xcolor}
 \newcommand\note[1]{\textcolor{red}{#1}}
 \usepackage{amsmath}
+\usepackage{tikz}
+\usetikzlibrary{positioning}
+\usetikzlibrary{decorations.pathreplacing,calligraphy}
 \usepackage{hyperref}% add hypertext capabilities
 %\usepackage[mathlines]{lineno}% Enable numbering of text and display math
 %\linenumbers\relax % Commence numbering lines
@@ -40,6 +43,7 @@
 %]{geometry}
 
 \newcommand\x{0.11\textwidth}
+\newcommand\y{0.5\textwidth}
 
 \begin{document}
 
@@ -126,13 +130,20 @@ Using base graphs, we can improve upon our method for generating candidate graph
     \caption{Examples of impossible combinations of transitions for the two-hysteron system. a) Several examples of impossible combinations of transitions. b) Example of an combination of transitions that is impossible due to a violation of the underlying base graph. c) Illustration of how the combination of transitions in (b) violates the underlying base graph.}
     \label{fig:impossiblegraphs}
 \end{figure}
-\begin{figure*}[ht!]
-    \centering
-    \includegraphics[width=0.8\textwidth]{base_graphs.png}
-    \caption{All possible base graphs for the two- and three-hysteron systems. a) All base graphs for $N=2$; since scrambling is not possible for $N=2$, the base graphs are the two Preisach graphs. b) All Preisach (top) and scrambled (bottom) base graphs for $N=3$. Graphs on a gray background are possible for general, but not linear coupling.}
-    \label{fig:basegraphs_n3}
-\end{figure*}
 \begin{table*}[]
+\begin{minipage}{0.6\textwidth}
+\textbf{a)}\\
+\centering
+\begin{tabular}{|c|c|}
+\hline
+\textbf{(1, 2)}&\textbf{(2, 1)}\\ \hline
+  \includegraphics[width=\y]{24-06-2022_N2graphs_preisach/graph0.pdf}
+& \includegraphics[width=\y]{24-06-2022_N2graphs_preisach/graph1.pdf} \\ \hline
+\end{tabular}
+\end{minipage}
+\begin{minipage}{0.95\textwidth}
+\textbf{b)}\\
+\centering
 \begin{tabular}{|c|c|ccc|c|c|cc|}
 \hline
 \textbf{(1, 2, 3)} & \textbf{(1, 3, 2)} & \textbf{(2, 3, 1)}&&& \textbf{(2, 1, 3)} & \textbf{(3, 1, 2)} & \textbf{(3, 1, 2)}&\\ \hline
@@ -162,14 +173,31 @@ Using base graphs, we can improve upon our method for generating candidate graph
 &\includegraphics[width=\x]{21-06-2022_N3graphs_base_unsolvable/graph0.pdf}\cellcolor{gray!30}                    
 &                    
 &\includegraphics[width=\x]{21-06-2022_N3graphs_base_scrambled/graph10.pdf}&\includegraphics[width=\x]{21-06-2022_N3graphs_base_scrambled/graph18.pdf}\\ \hline
-
 \end{tabular}
+\end{minipage}
+\caption{All possible base graphs for the two- and three-hysteron systems, indexed per main loop. a) All base graphs for $N=2$; since scrambling is not possible for $N=2$, the base graphs are the two Preisach graphs. b) All Preisach (top) and scrambled (bottom) base graphs for $N=3$. Graphs on a gray background are possible for general, but not linear coupling.}
+\label{fig:basegraphs_n3}
 \end{table*}
 In addition to the base graph method being an efficient method for generating candidate graphs, it also providedes us with a powerful framework for understanding the effects of hysteron interactions on the allowed transition graphs. \\
 \subsection{The base graph method}
-\begin{figure}[!ht]
-    \centering
-    \includegraphics[width=0.5\textwidth]{breakdown_sketch.png}
+\begin{figure}[ht!]
+\centering
+\begin{tikzpicture}[squarednode/.style={rectangle, draw=black, fill=white, thick, minimum size=3mm}]
+\node[squarednode](mainloop){Main loop};
+\node[squarednode](scrambling)[right=of mainloop] {Scrambling};
+\node[squarednode](avalanches)[right=of scrambling] {Avalanches};
+\node[squarednode](finalgraph)[right=of avalanches] {Final graph};
+
+\draw[->, very thick] (mainloop.east) -- (scrambling.west);
+\draw[->, very thick] (scrambling.east) -- (avalanches.west);
+\draw[->, very thick] (avalanches.north) arc (-80:260:10pt)
+node[pos=0.5, above=2pt]{Iterate over $l$};
+\draw[decorate, decoration = {calligraphic brace, amplitude=6pt,raise=10pt}, very thick] (mainloop.west)  -- (scrambling.east)
+node[pos=0.5,above=15pt,black] {Base graph};
+\draw[decorate, decoration = {calligraphic brace, amplitude=6pt,raise=10pt}, very thick] (avalanches.east)  -- (scrambling.west)
+node[pos=0.5, below=15pt,black] {Only with coupling}; 
+\draw[->, very thick] (avalanches.east) -- (finalgraph.west);
+\end{tikzpicture}
     \caption{Breakdown of an example transition graph into a base graph and a combination of avalanches. The base graph can itself be separated into the main loop and a number of scrambled transitions.}
     \label{fig:basegraphs_avalanches}
 \end{figure}
@@ -177,7 +205,7 @@ In addition to the base graph method being an efficient method for generating ca
 We here show how we generate the list of base graphs for $N$ hysterons, which is subsequently used to construct the full list of candidate graphs. We first explain how base graphs can be divided up into Preisach and scrambled graphs. We then detail how one can count the number of base graphs per main loop.\\
 We can distinguish between two groups of base graphs. First, there are the Preisach graphs, which are possible without coupling. Second, there is a group of scrambled graphs, which are possible for interacting hysterons. Scrambling is a phenomenon previously seen in interacting hysterons\cite{vhecke2021}\cite{bense2021}, where the order in which hysterons flip is not the same throughout the graph. It occurs when the ordering between the switching fields of two hysterons in the same phase are changed by one or more hysterons, and is therefore only possible for three or more hysterons. Remarkably, having introduced the concept of base graphs, we can identify scrambling as a feature of the base graph. We can thus separate the two coupling effects of scrambling and avalanches.\\
 In order to discuss scrambling more explicitly, we here define the main loop as the series of up and down transitions connecting the two saturated states. In the Preisach model, the ordering of the main loop fixes the transitions throughout the transition graph, so that each main loop corresponds to a unique Preisach graph. We additionally define the up and down boundary of the main loop as the series of up (down) transitions going from the state with all $s_i=0$ (1) to that with all $s_i=1$ (0). The number of main loops is then the number of permutations of the up boundary times that of the down boundary. Because both the up and down boundary consist of $N$ flips, there are $N!^2$ main loops. However, we fix the up boundary when accounting for exchange symmetry, thus dividing the number of main loops by $N!$.  Therefore, when accounting for exchange symmetry, there are only $N!$ main loops and resulting Preisach graphs.\\
-In a scrambled graph, one or more of the transitions in the graph deviates from the main loop, so that each main loop corresponds to a number of base graphs (Fig.\ref{fig:basegraphs_n3}).\\
+In a scrambled graph, one or more of the transitions in the graph deviates from the main loop, so that each main loop corresponds to a number of base graphs (Table.\ref{fig:basegraphs_n3}).\\
 We now explicitly calculate the number of base graphs per main loop. To start with, we observe that the number of possible up and down flips for a state $S$ depends on the number of hysterons that is in phase 0 or 1. Defining the magnetisation of a state as
 \begin{equation}
     M(S) = \sum_i s_i
