@@ -96,7 +96,7 @@ The possible responses of a collection of $N$ hysterons to driving are captured 
     \caption{Considerations for removing duplicate graphs: a) exchange symmetry and b) garden-of-Eden states.}
     \label{fig:exchangeplusgoe}
 \end{figure}
-We now describe two considerations that decrease the number of unique transition graphs, namely the 
+We now describe two considerations that decrease the number of unique transition graphs, namely exchange symmetry and the existence of Garden-of-Eden states. 
 \subsubsection{Exchange symmetry}
 The hysterons in our model are considered as indistinguishable particles. That is, when we define the state $S = \{s_1, s_2, ..., s_N\}$, the labelling of hysterons 1 through N is arbitrary. As a result, when two graphs only differ from one another by the ordering of the hysterons 1, 2, ..., N, we consider the graphs to be the same (Fig. \ref{fig:exchangeplusgoe}a).\\
 To account for exchange symmetry, we fix the order in which hysterons 1, 2, ..., N flip up when increasing the external field from the ground state. For example, for $N=3$, we have that hysteron 3 flips up first from the state 000, hysteron 2 flips up first from 001, and trivially hysteron 1 flips up first from 011. Since there are $N!$ permutations of the order of $N$ up switching fields, accounting for exchange symmetry decreases the number of candidate graphs by a factor $N!$. Thus, for $N=2$, the number of candidate graphs is reduced by a factor 2 from 2916 to 1458.
@@ -110,7 +110,7 @@ We have shown that it is straightforward to construct all Preisach graphs by con
 We thus see that it is inefficient to find all graphs for an interacting system of hysterons by considering the permutations of all switching fields. Even so, we can make use of the fact that the state transition graph only depends on a partial ordering of the switching fields. Namely, we know that each graph has an underlying set of linear inequalities $U_i(S_A) > U_j(S_B)$, which we refer to as the design inequalities\cite{vhecke2021}. The solution space of the design inequalities provides the region in parameter space that leads to the given graph. In particular, if the design inequalities have no solution, then the given graph is not realizable.\\
 \section{Constructing possible graphs}
 In recent work, the transition graphs for two- and three-hysteron systems were found using numerical sampling. The obtained graphs contain several noteworthy phenomena that are not possible in the Preisach model, such as breaking of loop return point memory, scrambling, multiperiodic cycles and long transients\cite{vhecke2021}.\\
-A significant disadvantage of numerical sampling is that it is not conclusive, as it is always possible that a region in parameter space leading to a certain transition graph is missed. Here we aim to establish a tool that can conclusively find all possible graphs for a given number of hysterons $N$. We base our method on the design inequalities, as introduced in Section \ref{ssec:ordering} and elaborated on in the Supplemental Information. We use the design inequalities to argue that the transitions that make up a graph, whether they are single flips or avalanches, can only be constructed out of a set collection of elementary steps. We use our method to construct a list of candidate graphs, then filter out the realizable graphs by explicitly checking the solution space of the design inequalities.\\
+A significant disadvantage of numerical sampling is that it is not conclusive, as it is always possible that a region in parameter space leading to a certain transition graph is missed. Here we aim to establish a tool that can conclusively find all possible graphs for a given number of hysterons $N$. We base our method on the design inequalities, as introduced in Section \ref{ssec:ordering} and elaborated on in the Supplemental Information. We use the design inequalities to argue that the transitions that make up a graph, whether they are single flips or avalanches, can only be constructed out of a fixed collection of elementary steps. We use our method to construct a list of candidate graphs, then filter out the realizable graphs by explicitly checking the solution space of the design inequalities.\\
 \subsection{Candidate graphs}\label{ssec:candidate_graphs}
 A well-defined transition graph for $N$ hysterons consists out of $2^N$ states, and $2(2^N-1)$ transitions, namely the up and down transitions from each state, except for the saturated states which only have one transition each. A transition graph is constructed by choosing a transition path for each of these $2(2^N-1)$ transitions. A transition path may be a single hysteron flip, or may consist of multiple flipped hysterons. When a transition path consists of multiple hysteron flips, we speak of an avalanche.\\
 Naively, one can construct all possible transition graphs by finding the possible transition paths for each individual transition. For example, for $N=2$ one finds $3^4\times 6^2 = 2916$ graphs (Fig.\ref{fig:transition_paths_N2}).\\
@@ -120,6 +120,21 @@ Naively, one can construct all possible transition graphs by finding the possibl
     \caption{Overview of the possible transition paths for each $N=2$ transition individually. The greyed-out area signifies transitions that are left out when accounting for exchange symmetry.}
     \label{fig:transition_paths_N2}
 \end{figure}
+\subsection{Base graphs}
+We now argue, based on the design inequalities, how avalanches must be constructed from a fixed choice of elementary steps.\\
+For the hysteron $i$ to flip up from the state $S$, the up switching field of hysteron $i$ must be the lowest of all the hysterons:
+\begin{equation}\label{eq:initial_transition}
+U_i^+(S) = \min_{s_j=0} U_j^+(S)
+\end{equation}
+Now suppose that the state $S$ is not stable, but is instead a part of an avalanche. Let $U*$ be the field at which the avalanche is initiated. Hysteron $i$ must then have
+\begin{equation}\label{eq:avalanche_unstable}
+U_i^+(S) \leq U*
+\end{equation}
+while all other hysterons $j$ with the state $s_j = 0$ must be stable, and therefore have
+\begin{equation}\label{eq:avalanche_stable}
+U_j^+(S) > U*
+\end{equation}
+Combining equations \ref{eq:avalanche_unstable} and \ref{eq:avalanche_stable}, we find that Equation \ref{eq:initial_transition} is implied.\\
 \subsection{Realizability}\label{ssec:realizability}
 To better understand why some graphs are not realizable,  we look in detail at the design inequalities underlying the graphs (see SI), and identify the inequalities that are in conflict with one another. By then tracing these inequalities back to the transitions from which we arise, we find the combinations of transitions (i.e., subgraphs) that are incompatible and thus make a graph not realizable. Several examples of impossible subgraphs are given in Fig. \ref{fig:impossiblegraphs}a.\\
 We now direct our attention to a particular group of impossible subgraphs, an example of which is shown in Fig. \ref{fig:impossiblegraphs}b. The example subgraph consists of the single-flip transition $11\downarrow 10$, and the avalanche $10\uparrow 11 \downarrow 01$. We observe that the transition $11 \downarrow 10$ requires that $U_2^-(11) > U_1^-(11)$ to have hysteron 2 flip down from the state 11. Conversely, the transition $10\uparrow 11 \downarrow 01$ requires the inequality $U_1^-(11) > U_2^-(11)$ to have an avalanche where only hysteron 1 flips down from the state 11. The contradiction between the two transitions arises because the avalanche $10 \uparrow 11 \downarrow 01$ imposes that the switching field $U_1^-$ is the highest down switching field, even though the transition $11 \downarrow 01$ is only a part of a larger avalanche.\\
